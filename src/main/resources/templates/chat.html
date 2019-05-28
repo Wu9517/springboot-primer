@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <script th:src="@{sockjs-0.3.min.js}"></script>
+    <script th:src="@{stomp.js}"></script>
+    <script th:src="@{jquery-1.4.4.min.js}"></script>
+</head>
+<body>
+<p>聊天室</p>
+<form id="wiselyForm">
+    <textarea rows="4" cols="60" name="text"></textarea>
+    <input type="submit"/>
+</form>
+<div id="output"></div>
+<script th:inline="javascript">
+    $('#wiselyForm').submit(function (e) {
+        e.preventDefault();
+        var text = $("#wiselyForm").find("textarea[name='text']").val();
+        sendSpittle(text);
+    })
+
+    var sock = new SockJS('/helloworld/endpointChat');
+    var stomp = Stomp.over(sock);
+    stomp.connect('guest', 'guest', function (frame) {
+        //对应WsController里的/queue/notifications，这里多的User是必须的，使用/user才会发送消息到指定的用户
+        stomp.subscribe("/user/queue/notifications", function (response) {
+            console.log(response);
+            $('#output').append("<b>Received: " + response.body + "</b><br/>")
+        })
+    })
+
+    function sendSpittle(text) {
+        stomp.send("/chat", {}, text);
+    }
+
+    $("#stop").click(function () {
+        sock.close()
+    });
+
+</script>
+</body>
+</html>
