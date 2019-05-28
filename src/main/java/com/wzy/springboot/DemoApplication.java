@@ -5,11 +5,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /*注解RestController才会根据路径访问到控制层业务代码*/
-@RestController
+@Controller
 @SpringBootApplication
 public class DemoApplication {
 
@@ -32,6 +36,20 @@ public class DemoApplication {
 	@RequestMapping(value = "/")
 	String index() {
 		return "Author is:" + authorSettings.getName() + " and his/her age is:" + authorSettings.getAge();
+	}
+
+	@RequestMapping(value = "/thymeleaf")
+	public String index2(Model model) {
+		Person single = new Person("周沐兰", 23);
+		model.addAttribute("singlePerson", single);
+		List<Person> list = new ArrayList<>();
+		list.add(new Person("周一", 23));
+		list.add(new Person("周二", 21));
+		list.add(new Person("周三", 22));
+		list.add(new Person("周四", 21));
+		list.add(new Person("周五", 23));
+		model.addAttribute("people", list);
+		return "index";
 	}
 
 }
