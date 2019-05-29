@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
+ * 设置后，如果没有登录成功则不能跳转到其他页面
  * @author wzy
  */
 @Configuration
@@ -15,7 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //在内存中分别配置两个用户wyf和wisely,密码和用户名一致，角色是USER，用户来自于谷歌用户
+        //在内存中分别配置两个用户wzy和zpc,密码和用户名一致，角色是USER，用户来自于谷歌用户
         //点击google浏览器用户头像可以创建用户。
         auth.inMemoryAuthentication().passwordEncoder(new MyPasswordEncoder())
                 .withUser("wzy").password("wzy").roles("USER")
