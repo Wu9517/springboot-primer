@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      lang="en"><!--提供spring security标签支持-->
+<head>
+    <meta content="text/html;charset=UTF-8"/>
+    <title sec:authentication="name"></title><!--获取当前用户名-->
+    <link th:href="@{bootstrap/css/bootstrap.css}" rel="stylesheet"/>
+    <style type="text/css">
+        body {
+            padding-top: 50px;
+        }
+
+        .start-template {
+            padding: 40px 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Spring Security演示</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/}">首页</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="start-template">
+        <h1 th:text="${msg.title}"></h1>
+        <p class="bg-primary" th:text="${msg.content}"></p>
+        <div sec:authorize="hasRole('ROLE_ADMIN')"><!--当前用户为ROLE_ADMIN时，显示标签内容-->
+            <P class="bg-info" th:text="${msg.etraInfo}"></P>
+        </div>
+        <div sec:authorize="hasRole('ROLE_USER')"><!--当前用户为ROLE_USER时，显示标签内容-->
+            <p class="bg-info">无更多信息显示</p>
+        </div>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" class="bth bth-primary" value="注销">
+        </form>
+    </div>
+</div>
+</body>
+</html>
