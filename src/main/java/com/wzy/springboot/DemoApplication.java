@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import java.util.List;
 /*注解RestController才会根据路径访问到控制层业务代码*/
 @Controller
 @SpringBootApplication
+@EnableCaching  //开启缓存支持
 public class DemoApplication {
 
     // 在某配置类中添加如下内容
