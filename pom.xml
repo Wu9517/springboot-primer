@@ -41,6 +41,14 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-validation</artifactId>
             </dependency>-->
+
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -63,6 +71,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-batch
+         批量处理数据-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-batch</artifactId>
+        </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -118,7 +134,8 @@
         </dependency>
 
 
-        <!--<dependency>
+        <!--
+         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.0.1</version>
@@ -132,6 +149,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -141,7 +159,9 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-        </dependency>-->
+        </dependency>
+        -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -156,8 +176,34 @@
             <scope>test</scope>
         </dependency>
 
-    </dependencies>
+        <!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-broker -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-broker</artifactId>
+            <version>5.15.9</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-activemq</artifactId>
+        </dependency>
+
+        <!-- &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.activemq/activemq-client &ndash;&gt;
+         <dependency>
+             <groupId>org.apache.activemq</groupId>
+             <artifactId>activemq-client</artifactId>
+             <version>5.15.9</version>
+         </dependency>
+
+         &lt;!&ndash; https://mvnrepository.com/artifact/org.springframework/spring-jms &ndash;&gt;
+         <dependency>
+             <groupId>org.springframework</groupId>
+             <artifactId>spring-jms</artifactId>
+             <version>5.1.5.RELEASE</version>
+         </dependency>-->
+
+
+    </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -166,5 +212,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>

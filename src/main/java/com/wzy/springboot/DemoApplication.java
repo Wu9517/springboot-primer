@@ -3,17 +3,20 @@ package com.wzy.springboot;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wzy.springboot.activeMQ.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +31,8 @@ import java.util.List;
 @EnableCaching  //开启缓存支持
 public class DemoApplication {
 
-    // 在某配置类中添加如下内容
+
+	// 在某配置类中添加如下内容
     // 监听的http请求的端口,需要在application配置中添加http.port=端口号  如80
     @Value("${http.port}")
     Integer httpPort;
@@ -42,11 +46,19 @@ public class DemoApplication {
 	@Autowired
 	private AuthorSettings authorSettings;
 
+	@Autowired
+	private JmsTemplate jmsTemplate;
+
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(DemoApplication.class);
 		/*打印自定义banner,文件来自于banner.txt*/
 		app.setBannerMode(Banner.Mode.LOG);
-		app.run(args);
+		ConfigurableApplicationContext context = app.run(args);
+
+		JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
+		// Send a message with a POJO - the template reuse the message converter
+		System.out.println("Sending an email message.");
+		jmsTemplate.convertAndSend("mailbox", new Email("info@example.com", "Hello"));
 	}
 
 	@RequestMapping(value = "/")
