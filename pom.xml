@@ -188,6 +188,12 @@
             <artifactId>spring-boot-starter-activemq</artifactId>
         </dependency>
 
+        <!--rabbitMQ用-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
         <!-- &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.activemq/activemq-client &ndash;&gt;
          <dependency>
              <groupId>org.apache.activemq</groupId>
